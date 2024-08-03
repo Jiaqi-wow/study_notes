@@ -226,7 +226,7 @@
    * 空间
    * 线程是否安全
 
-   ![image-20240712154603271](.\assert\javaSE\image-20240712154603271.png)每个线程都一份自己的局部变量
+   ![image-20240712154603271](assert/javaSE/image-20240712154603271.png)每个线程都一份自己的局部变量
 
    包装类？？？？
 
@@ -236,7 +236,7 @@
 
      ArrayList add方法源码jdk8：
 
-     ![image-20240712110541729](.\assert\javaSE\image-20240712110541729.png)
+     ![image-20240712110541729](assert/javaSE/image-20240712110541729.png)
 
      add方法：首先确保内部容量（当前ArrayList容量+1），然后向elementData中添加数据。
 
@@ -248,11 +248,11 @@
 
      所以扩容有两类时间点：一是第一次添加数据时，一是后续容量不够时。
 
-     ![image-20240712111735637](.\assert\javaSE\image-20240712111735637.png)
+     ![image-20240712111735637](assert/javaSE/image-20240712111735637.png)
 
      ##### ArrayList list=new ArrayList(10)中的list扩容几次？
 
-     源码：![image-20240712112212041](.\assert\javaSE\image-20240712112212041.png)
+     源码：![image-20240712112212041](assert/javaSE/image-20240712112212041.png)
 
      回答：
 
@@ -264,13 +264,13 @@
 
    * 数组转List  使用Array一个静态方法asList
 
-     ![image-20240712114256998](.\assert\javaSE\image-20240712114256998.png)
+     ![image-20240712114256998](assert/javaSE/image-20240712114256998.png)
 
      返回的List的实现类，不是我们常使用的ArrayList，它在Arrays类中写了一个静态内部类，该内部类继承了了List接口，且没有创建新的数组来存储容器元素，还是指向了传进构造器的数组
 
    * List转成数组：使用List的toArray()方法
 
-     ![image-20240712115122933](.\assert\javaSE\image-20240712115122933.png)
+     ![image-20240712115122933](assert/javaSE/image-20240712115122933.png)
 
    有参的toArray()方法可以通过参数的类型帮助确定返回数组的类型，要不然就返回Object类型数组。
 
@@ -490,11 +490,11 @@ public  class Person implements Comparable<Person> {
 
 3. HashMap的put方法的具体流程？五颗星出现频率 涉及到**扩容**和**变红黑树**两个事情。扩容的时机？变红黑树的时机？扩容后怎么复制到新数组？
 
-   ![image-20240714210548292](.\assert\javaSE\image-20240714210548292.png)
+   ![image-20240714210548292](assert/javaSE/image-20240714210548292.png)
 
 1. 讲一讲HashMap的扩容机制？**扩容方法是resize()**
 
-   ![HashMap扩容操作](.\assert\javaSE\HashMap扩容操作.png)
+   ![HashMap扩容操作](assert/javaSE/HashMap扩容操作.png)
 
    
 
@@ -516,7 +516,7 @@ public  class Person implements Comparable<Person> {
 
 4. hashmap在1.7情况下的多线程死循环问题？
 
-   ![image-20240714221704582](.\assert\javaSE\image-20240714221704582.png)
+   ![image-20240714221704582](assert/javaSE/image-20240714221704582.png)
 
    
 
@@ -535,7 +535,7 @@ public  class Person implements Comparable<Person> {
 
 2. HashMap和HashSet区别
 
-   ![image-20240729160645828](.\assert\javaSE\image-20240729160645828.png)
+   ![image-20240729160645828](assert/javaSE/image-20240729160645828.png)
 
    
 
