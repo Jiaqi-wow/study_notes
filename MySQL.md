@@ -60,6 +60,8 @@
 
 ![image-20240716111734771](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240716111734771.png)
 
+CHAR_LENGTH(content)  功能：返回字符串长度
+
 注意：sql中字符串的索引从1开始
 
 ![image-20240716112038616](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240716112038616.png)
