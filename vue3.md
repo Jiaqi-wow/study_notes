@@ -1,4 +1,4 @@
-# 1. Vue3简介
+#  1. Vue3简介
 
 - 2020年9月18日，`Vue.js`发布版`3.0`版本，代号：`One Piece`（n
 
@@ -686,7 +686,7 @@ function test(){
   function changeSum(){
     sum.value += 1
   }
-  // 监视，情况一：监视【ref】定义的【基本类型】数据，watch的第二个参数是回调函数，我感觉这东西根本不能叫函数，就是一个执行逻辑的代码块。newValue，oldValue是实参
+  // 监视，情况一：监视【ref】定义的【基本类型】数据，watch的第二个参数是回调函数，vue会在合适的时候调用这个函数
   const stopWatch = watch(sum,(newValue,oldValue)=>{
     console.log('sum变化了',newValue,oldValue)
     if(newValue >= 10){
@@ -991,9 +991,9 @@ function test(){
   </script>
   ```
 
-  
+  <style scoped ></style> scoped  的意思是表示这个样式作用域，仅在当前vue组件中
 
-## 3.11. 【标签的 ref 属性】
+## 3.11. 【标签的 ref 属性】 ref：标签标识，且作用域为本vue组件 id：也是标签标识，但作用域是全局 
 
 作用：用于注册模板引用。
 
@@ -1032,7 +1032,7 @@ function test(){
 		/************************************/
 		
     // 通过ref获取元素
-    console.log(title1.value)
+    console.log(title1.value) //获取的是dom
     console.log(title2.value)
     console.log(title3.value)
   }
@@ -1055,7 +1055,7 @@ function test(){
   let ren = ref()
 
   function test(){
-    console.log(ren.value.name)
+    console.log(ren.value.name)//ren.value 是组件实例Proxy对象 ren.value.name获取子组件暴露的元素 
     console.log(ren.value.age)
   }
 </script>
@@ -1070,13 +1070,13 @@ function test(){
   /****************************/
   /****************************/
   // 使用defineExpose将组件中的数据交给外部
-  defineExpose({name,age})
+  defineExpose({name,age})//name 是 name:name:value 的简写
 </script>
 ```
 
 
 
-## 3.12. 【props】
+## 3.12. 【props】 父子组件通信
 
 > ```js
 > // 定义一个接口，限制每个Person对象的格式
@@ -1134,7 +1134,7 @@ function test(){
 > // 第二种写法：接收+限制类型
 > // defineProps<{list:Persons}>()
 > 
-> // 第三种写法：接收+限制类型+指定默认值+限制必要性
+> // 第三种写法：接收+限制类型+指定默认值+限制必要性//带Defaults可能可以不引入
 > let props = withDefaults(defineProps<{list?:Persons}>(),{
 >   list:()=>[{id:'asdasg01',name:'小猪佩奇',age:18}]
 > })
@@ -1154,7 +1154,7 @@ function test(){
 
   > 创建阶段：`beforeCreate`、`created`
   >
-  > 挂载阶段：`beforeMount`、`mounted`
+  > 挂载阶段：`beforeMount`、`mounted`放到页面上了
   >
   > 更新阶段：`beforeUpdate`、`updated`
   >
@@ -1223,7 +1223,7 @@ function test(){
   </script>
   ```
 
-## 3.14. 【自定义hook】
+## 3.14. 【自定义hook】 模块化开发 把相同功能的数据和方法放在一起；hooks本质是一个ts/js文件 ，向外暴露函数
 
 - 什么是`hook`？—— 本质是一个函数，把`setup`函数中使用的`Composition API`进行了封装，类似于`vue2.x`中的`mixin`。
 
@@ -1260,7 +1260,7 @@ function test(){
   import {reactive,onMounted} from 'vue'
   import axios,{AxiosError} from 'axios'
   
-  export default function(){
+  export default function(){ //默认导出一个方法，导入时可以用任意名称
     let dogList = reactive<string[]>([])
   
     // 方法
@@ -1283,7 +1283,7 @@ function test(){
     })
   	
     //向外部暴露数据
-    return {dogList,getDog}
+    return {dogList,getDog} //js中函数内可以有内部函数，内部函数可以用外部函数的变量，但是外部函数不能用内部函数的变量
   }
   ```
 
@@ -1321,7 +1321,7 @@ function test(){
 
 ---
 
-# 4. 路由
+# 4. 路由 
 
 ## 4.1. 【对路由的理解】
 
@@ -1390,9 +1390,10 @@ function test(){
 
 ## 4.3. 【两个注意点】
 
-> 1. 路由组件通常存放在`pages` 或 `views`文件夹，一般组件通常存放在`components`文件夹。
->
-> 2. 通过点击导航，视觉效果上“消失” 了的路由组件，默认是被**卸载**掉的，需要的时候再去**挂载**。
+> 1. **路由组件**通常存放在`pages` 或 `views`文件夹，**一般组件**通常存放在`components`文件夹。
+> 2. 一般组件：程序员亲手写标签出来的；路由组件：靠路由规则渲染出来的。
+> 3. 通过点击导航，视觉效果上“消失” 了的路由组件，默认是被**卸载**掉的，需要的时候再去**挂载**。
+> 4. 单页面应用就是全程只有一个html文件
 
 ## 4.4.【路由器工作模式】
 
@@ -1400,7 +1401,7 @@ function test(){
 
    > 优点：`URL`更加美观，不带有`#`，更接近传统的网站`URL`。
    >
-   > 缺点：后期项目上线，需要服务端配合处理路径问题，否则刷新会有`404`错误。
+   > 缺点：后期项目上线，**需要服务端配合处理路径问题，否则刷新会有`404`错误。** 为什么？
    >
    > ```js
    > const router = createRouter({
@@ -1491,7 +1492,7 @@ routes:[
    			component:News,
    			children:[
    				{
-   					name:'xiang',
+   					name:'xiang', //注意这个不用加/，vue自动给加
    					path:'detail',
    					component:Detail
    				}
@@ -1565,7 +1566,7 @@ routes:[
    2. 接收参数：
 
       ```js
-      import {useRoute} from 'vue-router'
+      import {useRoute} from 'vue-router' //useXxx是hook的命名规范
       const route = useRoute()
       // 打印query参数
       console.log(route.query)
@@ -1606,7 +1607,7 @@ routes:[
 
 > 备注1：传递`params`参数时，若使用`to`的对象写法，必须使用`name`配置项，不能用`path`。
 >
-> 备注2：传递`params`参数时，需要提前在规则中占位。
+> 备注2：传递`params`参数时，需要提前在规则中占位。在路由器文件中要占位，格式位detail/:id/:title/:content?  加？是可传可不传的意思
 
 ## 4.9. 【路由的props配置】
 
