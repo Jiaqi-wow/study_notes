@@ -1,6 +1,6 @@
 # 内存模型
 
-![image-20240803131152587](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803131152587.png)
+![image-20240803131152587](.\assert\jvm\image-20240803131152587.png)
 
 ## 1. 程序计数器的作用，为什么是私有的？
 
@@ -16,7 +16,7 @@
 
 * 随着JVM的发展和不同垃圾收集器的实现，堆的具体划分可能会有所不同，但通常可以分为以下几个部分：
 
-  ![image-20240803132704964](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803132704964.png)
+  ![image-20240803132704964](.\assert\jvm\image-20240803132704964.png)
 
   * 新生代:新生代分为Eden Space和Survivor Space。在Eden Space中， 大多数新创建的对象首先存放在这里。Eden区相对较小，当Eden区满时，会触发一次Minor GC（新生代垃圾回收）。在Survivor Spaces中，通常分为两个相等大小的区域，称为S0（Survivor 0）和S1（Survivor 1）。在每次Minor GC后，存活下来的对象会被移动到其中一个Survivor空间，以继续它们的生命周期。这两个区域轮流充当对象的中转站，帮助区分短暂存活的对象和长期存活的对象。
   * 老年代（Old Generation/Tenured Generation）:经过一次或多次Minor GC仍存活的对象会被移动到老年代。老年代中的对象生命周期较长，因此Major GC（也称为Full GC，涉及老年代的垃圾回收）发生的频率相对较低，但其执行时间通常比Minor GC长。老年代的空间通常比新生代大，以存储更多的长期存活对象。
@@ -63,25 +63,25 @@ class文件包含类基本信息、常量池、方法定义。
 
 类基本信息：
 
-![image-20240803141957321](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803141957321.png)
+![image-20240803141957321](.\assert\jvm\image-20240803141957321.png)
 
 方法定义：
 
-![image-20240803142114952](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803142114952.png)
+![image-20240803142114952](.\assert\jvm\image-20240803142114952.png)
 
 （无参构造函数）
 
-![image-20240803142138268](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803142138268.png)
+![image-20240803142138268](.\assert\jvm\image-20240803142138268.png)
 
 （mian方法）
 
 常量池：
 
-![image-20240803142306513](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803142306513.png)
+![image-20240803142306513](.\assert\jvm\image-20240803142306513.png)
 
-![image-20240803142349815](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803142349815.png)
+![image-20240803142349815](.\assert\jvm\image-20240803142349815.png)
 
-![image-20240803142413758](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240803142413758.png)
+![image-20240803142413758](.\assert\jvm\image-20240803142413758.png)
 
  ## 6. 你听过直接内存吗？
 
