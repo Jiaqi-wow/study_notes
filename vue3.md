@@ -1619,10 +1619,10 @@ routes:[
 	path:'detail/:id/:title/:content',
 	component:Detail,
 
-  // props的对象写法，作用：把对象中的每一组key-value作为props传给Detail组件
+  // props的对象写法，作用：把对象中的每一组key-value作为props传给Detail组件，用的很少
   // props:{a:1,b:2,c:3}, 
 
-  // props的布尔值写法，作用：把收到了每一组params参数，作为props传给Detail组件
+  // props的布尔值写法，作用：把收到了每一组params参数，作为props传给Detail组件 父子组件通信了 参数作为标签属性传过去的
   // props:true
   
   // props的函数写法，作用：把返回的对象中每一组key-value作为props传给Detail组件
@@ -1647,7 +1647,7 @@ routes:[
      <RouterLink replace .......>News</RouterLink>
      ```
 
-## 4.11. 【编程式导航】
+## 4.11. 【编程式导航】 脱离\<RouterLink>实现路由导航
 
 路由组件的两个重要的属性：`$route`和`$router`变成了两个`hooks`
 
@@ -1655,7 +1655,13 @@ routes:[
 import {useRoute,useRouter} from 'vue-router'
 
 const route = useRoute()
-const router = useRouter()
+const router = useRouter()// 拿到路由器
+
+onMounted(()=>{
+    setTimeOut(()=>{
+        router.push("/news")
+    },3000) //3秒后跳转
+})
 
 console.log(route.query)
 console.log(route.parmas)
@@ -1678,7 +1684,7 @@ console.log(router.replace)
 
 
 
-# 5. pinia 
+# 5. pinia  集中式状态（数据）管理
 
 ## 5.1【准备一个效果】
 
@@ -1726,7 +1732,7 @@ app.mount('#app')
    export const useCountStore = defineStore('count',{
      // 动作
      actions:{},
-     // 状态
+     // 状态，即数据
      state(){
        return {
          sum:6
@@ -1802,7 +1808,7 @@ app.mount('#app')
 1. 第一种修改方式，直接修改
 
    ```ts
-   countStore.sum = 666
+   countStore.sum = 666 //sum本来时refImpl 但是自动解包了 所以不用.value
    ```
 
 2. 第二种修改方式：批量修改
@@ -1899,13 +1905,14 @@ app.mount('#app')
            school:'atguigu'
          }
        },
-       // 计算
+       // 计算,对数据进一步加工
        getters:{
-         bigSum:(state):number => state.sum *10,
+         bigSum:(state):number => state.sum *10, //方法简写，:number是ts数据类型限制
          upperSchool():string{
            return this. school.toUpperCase()
          }
        }
+       
      })
      ```
 
@@ -1918,12 +1925,12 @@ app.mount('#app')
 
      
 
-## 5.7.【$subscribe】
+## 5.7.【$subscribe】 监视数据变化
 
 通过 store 的 `$subscribe()` 方法侦听 `state` 及其变化
 
 ```ts
-talkStore.$subscribe((mutate,state)=>{
+talkStore.$subscribe((mutate,state)=>{ //mutate：本次修改的信息，state
   console.log('LoveTalk',mutate,state)
   localStorage.setItem('talk',JSON.stringify(talkList.value))
 })
